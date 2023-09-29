@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="8dp"
+    android:layout_marginHorizontal="24dp"
+    android:background="@drawable/bg_movie_card">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/artworkCardView"
+        android:layout_width="56dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginVertical="24dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintDimensionRatio="1:1.4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/artworkImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@+id/artworkCardView"
+        app:layout_constraintStart_toEndOf="@+id/artworkCardView"
+        app:layout_constraintEnd_toStartOf="@+id/favoriteButton">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/primary_27E"
+            tools:text="Star Wars: The Force Awakens"/>
+
+        <TextView
+            android:id="@+id/releaseAndGenreTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:textSize="12sp"
+            tools:text="2019 | Action &amp; Adventure"/>
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            tools:text="AU 19.99"/>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/favoriteButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:button="@drawable/favorite_check_button"
+        app:buttonTint="@color/primary_27E"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

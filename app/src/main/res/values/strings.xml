@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">iMovies</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="error_no_internet">No internet connection</string>
+
+    <string name="home_search_hint">Search title</string>
+    <string name="home_last_visit">Last Visit:</string>
+
+    <string name="movie_adapter_release_year_and_genre">%s | %s</string>
+
+
+    <string name="common_loading">Please wait…</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_error_title">Error</string>
+    <string name="common_error_message">Oops, something went wrong. Please try again later.</string>
+
+    <string name="movie_details_retry">Retry</string>
+</resources>
