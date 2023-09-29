@@ -17,6 +17,7 @@ interface MovieService {
 
     @GET("lookup")
     suspend fun doGetMovie(
+        @Query("country") country: String = "au",
         @Query("id") id: Int
     ): Response<BaseResponse<List<MovieResponse>>>
 

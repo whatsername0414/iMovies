@@ -1,6 +1,7 @@
 package com.example.imovies.ui.main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -128,12 +129,14 @@ class HomeFragment : Fragment() {
                     }
                 }
                 is Resource.Success -> {
+                    Log.d("SuccessCall", "Called")
                     movieAdapter.submitList(res.data)
                     binding.apply {
                         swipeRefreshLayout.isRefreshing = false
                     }
                 }
                 is Resource.Error -> {
+                    Log.d("FailedCall", "Called")
                     binding.apply {
                         swipeRefreshLayout.isRefreshing = false
                     }

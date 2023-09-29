@@ -3,12 +3,7 @@ package com.example.imovies.di
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
-import com.example.imovies.common.Constant.PREFERENCES_STORE_NAME
 import com.example.imovies.data.repository.common.local.Database
 import dagger.Module
 import dagger.Provides
@@ -46,15 +41,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideFavoriteDao(db: Database) = db.favoriteDao()
-
-    @Singleton
-    @Provides
-    fun providePreferences(@ApplicationContext app: Context): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            produceFile = {
-                app.preferencesDataStoreFile(PREFERENCES_STORE_NAME)
-            })
-    }
 
     @Singleton
     @Provides

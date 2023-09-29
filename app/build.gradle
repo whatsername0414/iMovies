@@ -6,9 +6,13 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'com.example.imovies'
     compileSdk 33
+    flavorDimensions "default"
 
     defaultConfig {
         applicationId "com.example.imovies"
@@ -22,12 +26,66 @@ android {
         buildConfigField "String", "BASE_URL", BASE_URL
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile file(properties.getProperty('release.jks.path', ''))
+            storePassword properties.getProperty('release.jks.password', '')
+            keyAlias properties.getProperty('release.jks.alias', '')
+            keyPassword properties.getProperty('release.jks.aliasPassword', '')
+
+            enableV3Signing = true
+
+        }
         release {
-            minifyEnabled false
+            storeFile file(properties.getProperty('release.jks.path', ''))
+            storePassword properties.getProperty('release.jks.password', '')
+            keyAlias properties.getProperty('release.jks.alias', '')
+            keyPassword properties.getProperty('release.jks.aliasPassword', '')
+
+            enableV3Signing = true
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Dev - iMovies"
+        }
+        prod {
+            resValue "string", "app_name", "iMovies"
+        }
+    }
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                def builder = new StringBuilder()
+                builder.append("iMovie")
+                builder.append("-")
+                builder.append("v")
+                builder.append(versionName)
+                builder.append("-")
+                builder.append(buildType.name)
+                builder.append(".apk")
+
+                outputFileName = builder.toString()
+            }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -93,7 +151,4 @@ dependencies {
 
     //Loading Spinner
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-
-    //Preferences
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }

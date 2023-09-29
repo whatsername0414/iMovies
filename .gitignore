@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/prod/release/iMovie-v1.0-release.apk
+/app/release/iMovie-v1.0-release.apk
+/app/prod/release/output-metadata.json
+/app/release/output-metadata.json
+/keystore.jks
