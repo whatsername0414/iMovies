@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
             binding.lastVisitTextView.text = if (lastDateVisit.isEmpty()) "No Data"
             else lastDateVisit.formatDate(
                     Constant.EEE_MMM_DD_HH_MM_SS_ZZZZ_YYY,
-                    Constant.MMM_DD_YYY_HH_MM
+                    Constant.MMM_DD_YYY_HH_MM_AA
                 )
             movieRv.adapter = movieAdapter
             swipeRefreshLayout.setOnRefreshListener {

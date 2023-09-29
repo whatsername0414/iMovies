@@ -7,5 +7,5 @@ object Constant {
     const val LAST_DATE_VISIT = "last_date_visit"
 
     const val EEE_MMM_DD_HH_MM_SS_ZZZZ_YYY = "EEE MMM dd HH:mm:ss zzzz yyyy"
-    const val MMM_DD_YYY_HH_MM = "MMM dd, yyyy hh:mm"
+    const val MMM_DD_YYY_HH_MM_AA = "MMM dd, yyyy hh:mm aa"
 }
