@@ -10,6 +10,9 @@
 
     <string name="movie_adapter_release_year_and_genre">%s | %s</string>
 
+    <string name="favorite_empty">Empty Favorites</string>
+    <string name="favorite_empty_message">Start adding your favorite\nmovies by clicking the heart icon\nin the movie cards.</string>
+    <string name="favorite_add">Add</string>
 
     <string name="common_loading">Please wait…</string>
     <string name="common_retry">Retry</string>

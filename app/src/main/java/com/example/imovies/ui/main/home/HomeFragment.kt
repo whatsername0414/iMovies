@@ -55,6 +55,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observers()
+        appPreferences.saveString(LAST_DATE_VISIT, Date().toString())
         homeViewModel.doGetMovies("star", homeViewModel.isForceUpdate())
         homeViewModel.setIsForceUpdate(false)
 
@@ -72,14 +73,13 @@ class HomeFragment : Fragment() {
 
 
         binding.apply {
-            val lastDateVisit = appPreferences.getString(LAST_DATE_VISIT).orEmpty()
             if (mainViewModel.getIsNewOpen()) {
                 navigate(appPreferences.getString(LAST_PAGE_VISIT).orEmpty())
-                appPreferences.saveString(LAST_DATE_VISIT, Date().toString())
                 mainViewModel.setIsNewOpen(false)
             } else {
                 appPreferences.saveString(LAST_PAGE_VISIT, "")
             }
+            val lastDateVisit = mainViewModel.getLastDateVisit()
             binding.lastVisitTextView.text = if (lastDateVisit.isEmpty()) "No Data"
             else lastDateVisit.formatDate(
                     Constant.EEE_MMM_DD_HH_MM_SS_ZZZZ_YYY,

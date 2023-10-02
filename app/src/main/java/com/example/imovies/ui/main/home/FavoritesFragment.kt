@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.imovies.R
 import com.example.imovies.common.Constant.LAST_PAGE_VISIT
 import com.example.imovies.common.dialog.CommonDialog
+import com.example.imovies.common.setSingleClickListener
 import com.example.imovies.data.repository.common.local.preferences.AppPreferences
 import com.example.imovies.data.repository.common.resource.Resource
 import com.example.imovies.databinding.FragmentFavoritesBinding
@@ -46,8 +49,14 @@ class FavoritesFragment : Fragment() {
         homeViewModel.doGetFavorites()
         appPreferences.saveString(LAST_PAGE_VISIT, R.id.favoritesFragment.toString())
 
-        favoriteAdapter.onFavoriteClicked = { movie ->
-            homeViewModel.doUpdateFavorite(movie)
+        favoriteAdapter.apply {
+            onFavoriteClicked = { movie ->
+                homeViewModel.doUpdateFavorite(movie)
+            }
+            onMovieClicked = { movie ->
+                findNavController().navigate(FavoritesFragmentDirections
+                    .actionFavoritesFragmentToMovieDetailsFragment(movie.id))
+            }
         }
 
         binding.apply {
@@ -55,6 +64,9 @@ class FavoritesFragment : Fragment() {
             appBarLayout.toolbar.apply {
                 val appBarConfiguration = AppBarConfiguration(findNavController().graph)
                 this.setupWithNavController(findNavController(), appBarConfiguration)
+            }
+            addButton.setSingleClickListener {
+                findNavController().popBackStack()
             }
         }
     }
@@ -64,6 +76,7 @@ class FavoritesFragment : Fragment() {
             when (res) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
+                    binding.emptyLayout.isVisible = res.data.isEmpty()
                     favoriteAdapter.submitList(res.data)
                 }
                 is Resource.Error -> {
