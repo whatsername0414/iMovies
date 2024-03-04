@@ -42,6 +42,8 @@ File >> Import Project >> Select the cloned repository
 
 *release.jks.password=*
 
+[keystore credentials](documentationAssets/keystore_creds.txt)
+
 
 
 ||||
